@@ -3464,43 +3464,4 @@ if not _G.VialLibrary then
     _G.VialLibrary = VialLibrary
 end
 
-Citizen.CreateThread(function()
-    Citizen.Wait(2000)
-    
-    local testLib = VialLibrary:New({
-        ToggleKey = 45,
-        MenuColor = {220, 50, 50, 255},
-        MenuTitle = "Test UI",
-        FooterText = "Test",
-        StartOpened = true,
-        Colors = {
-            Accent = {220, 50, 50, 255},
-            AccentGlow = {220, 50, 50, 120}
-        }
-    })
-    
-    local testWindow = testLib:CreateWindow("Test Window")
-    local testTab = testWindow:AddTab("Main")
-    local testSubTab = testTab:AddSubTab("Test")
-    local testSection = testSubTab:AddSection("Test Section", "left")
-    
-    testSection:AddLabel("Test Label")
-    testSection:AddToggle("Test Toggle", false, function(val)
-        print("Toggle value: " .. tostring(val))
-    end)
-    testSection:AddButton("Test Button", function()
-        print("Button clicked!")
-    end)
-    testSection:AddSlider("Test Slider", 0, 100, 50, function(val)
-        print("Slider value: " .. val)
-    end)
-    
-    testWindow.ActiveTab = testTab
-    testLib:Start()
-    
-    if testLib.Open then
-        Ham.toggleMouse()
-    end
-end)
-
 return VialLibrary
